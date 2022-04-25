@@ -3,7 +3,7 @@
 let SR_CLK = 9;
 let INSR0_DATA = DigitalPin.P16;        //Data
 let INSR_LATCH = 8;
-let BASE = 8;
+let BASE = 0;
 
 enum KEY {
     UP = 0,
@@ -34,7 +34,7 @@ namespace SimpleShieldKey {
         KEYSCAN = 0;
         let i = 0;
         Servo.SetLED(1, true);
-        for (i = 0; i < 16; i++) {
+        for (i = 0; i < 8+BASE; i++) {
             KEYSCAN = KEYSCAN << 1;
             let tmp = pins.digitalReadPin(INSR0_DATA);
             KEYSCAN |= tmp;
@@ -44,12 +44,24 @@ namespace SimpleShieldKey {
             control.waitMicros(20000);
         }
         Servo.SetLED(1, false);
-        if (((KEYSCAN >> 15) & 0x01) == 1 || ((KEYSCAN>>4)&0x01) == 0 || ((KEYSCAN>>5)&0x01)==0 || ((KEYSCAN>>6)&0X01)==1 || ((KEYSCAN>>7)&0X01)==1)
+        if (((KEYSCAN >> 7+BASE) & 0x01) == 1)
         {
-            KEYSCAN = 32575;
+            KEYSCAN = 127;
+            if(BASE == 8)
+            {
+                KEYSCAN = 32575;
+            }
             return;
         }
-        basic.showNumber(KEYSCAN);
+        if(BASE == 8)
+        {
+            if (((KEYSCAN >> 4) & 0x01) == 0 || ((KEYSCAN >> 5) & 0x01) == 0 || ((KEYSCAN >> 6) & 0X01) == 1 || ((KEYSCAN >> 7) & 0X01) == 1) 
+            {
+                KEYSCAN = 32575;
+                return;
+            }
+        }
+        //basic.showNumber(KEYSCAN);
     }
 
     //% blockID==Listen_Key

@@ -24,10 +24,10 @@ basic.forever(function () {
     SimpleShieldKey.Read74HC165()
     
     if (SimpleShieldKey.Listen_Key(KEY.UP)) {
-        Motor.MotorRun(Motors.M1, 100)
+        Motor.MotorRun(Motors.M1, 160)
     }
     else if (SimpleShieldKey.Listen_Key(KEY.DOWN)) {
-        Motor.MotorRun(Motors.M1, -100)
+        Motor.MotorRun(Motors.M1, -160)
     }
     else if (SimpleShieldKey.Listen_Key(KEY.A)) {
         Motor.MotorRun(Motors.M1, 0)
