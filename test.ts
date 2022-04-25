@@ -15,10 +15,12 @@ basic.forever(function() {
 })
 
 input.onButtonPressed(Button.A, function() {
-    LCD1IN8.DrawRectangle(randint(0, 80), randint(0, 60), randint(80, 159), randint(60, 119), randint(0, 65535), DRAW_FILL.DRAW_EMPTY, DOT_PIXEL.DOT_PIXEL_1)
+    //LCD1IN8.DrawRectangle(randint(0, 80), randint(0, 60), randint(80, 159), randint(60, 119), randint(0, 65535), DRAW_FILL.DRAW_EMPTY, DOT_PIXEL.DOT_PIXEL_1)
+    Servo.Servo(13, 0)
 })
 input.onButtonPressed(Button.B, function () {
-    LCD1IN8.LCD_Filling(randint(0, 65535))
+    //LCD1IN8.LCD_Filling(randint(0, 65535))
+    Servo.Servo(13, 180)
 })
 basic.forever(function () {
     SimpleShieldKey.Read74HC165()
