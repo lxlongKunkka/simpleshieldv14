@@ -33,7 +33,6 @@ namespace SimpleShieldKey {
         control.waitMicros(20000);
         KEYSCAN = 0;
         let i = 0;
-        Servo.SetLED(1, true);
         for (i = 0; i < 8+BASE; i++) {
             KEYSCAN = KEYSCAN << 1;
             let tmp = pins.digitalReadPin(INSR0_DATA);
@@ -43,7 +42,6 @@ namespace SimpleShieldKey {
             Servo.FullOn(SR_CLK);
             control.waitMicros(20000);
         }
-        Servo.SetLED(1, false);
         if (((KEYSCAN >> 7+BASE) & 0x01) == 1)
         {
             KEYSCAN = 127;
